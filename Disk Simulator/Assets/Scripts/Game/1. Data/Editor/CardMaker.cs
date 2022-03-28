@@ -1,0 +1,218 @@
+﻿using UnityEngine;
+using UnityEditor;
+using System;
+using System.IO;
+using System.Collections.Generic;
+
+
+namespace Game {
+    /// <summary>
+    /// Window to help create new card data files easily
+    /// </summary>
+    public class CardMakerWindow : EditorWindow {
+        // cache
+        CardData card = new CardData();
+        Dictionary<string, bool> foldoutCache = new Dictionary<string, bool>();
+        Vector2 scroll;
+        bool noSprite = true;
+        int prevCardID = -1;
+
+        [MenuItem("Window/Card Maker")]
+        public static void ShowWindow() {
+            GetWindow(typeof(CardMakerWindow));
+        }
+
+        //******************************************************************************************
+        // GUI
+        //******************************************************************************************
+
+        void OnGUI() {
+            scroll = EditorGUILayout.BeginScrollView(scroll);
+            CommonData();
+            MonsterData();
+            CreateCardDataButton();
+            EditorGUILayout.EndScrollView();
+        }
+        void CommonData() {
+            // header
+            var style = new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold };
+            GUILayout.Label("Common Data", style);
+
+            // fields
+            card.id = EditorGUILayout.IntField("ID", card.id);
+            NoSpriteWarning();
+            card.name = EditorGUILayout.TextField("Name", card.name);
+            card.validZones = DisplayFlagsAsToggles(card.validZones, "Valid Zones");
+            card.cardType = DisplayEnumAsToggles(card.cardType, "Card Type");
+        }
+
+        void MonsterData() {
+            // only for monster cards
+            if (card.cardType != CardType.monster) {
+                return;
+            }
+
+            // header
+            var style = new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold };
+            EditorGUILayout.Space();
+            GUILayout.Label("Monster Data", style);
+
+            // fields
+            card.level = EditorGUILayout.IntField("Level", card.level);
+            card.atk = EditorGUILayout.IntField("Attack", card.atk);
+            card.def = EditorGUILayout.IntField("Defense", card.def);
+
+            card.monsterType = DisplayFlagsAsToggles(card.monsterType, "Monster Type");
+            card.attribute = DisplayEnumAsToggles(card.attribute, "Attribute");
+
+            // range correction
+            card.level = card.level < 1 ? 1 : card.level;
+            card.atk = card.atk < 0 ? 0 : card.atk;
+            card.def = card.def < 0 ? 0 : card.def;
+        }
+
+        void CreateCardDataButton() {
+            EditorGUILayout.Space();
+            EditorGUILayout.Space();
+
+            bool create = GUILayout.Button("Create File");
+
+            if (!create) {
+                return;
+            }
+
+            // TODO cconfirmation popup that displays all information succinctly 
+
+            string path = Application.dataPath + $"/Resources/Card Data/{card.id}.json";
+            bool alreadyExist = File.Exists(path);
+
+            // TODO if alreadyExist, confirmation popup to override existing file
+            File.WriteAllText(path, card.ToJson());
+        }
+
+        //******************************************************************************************
+        // GUI helper Functions
+        //******************************************************************************************
+
+        void NoSpriteWarning() {
+            // When to check
+            bool check =
+                prevCardID != card.id // change ID
+                || (UnityEngine.Random.value < .1f); // randomly check to see if sprite has been updated
+            prevCardID = card.id;
+
+            // check
+            if (check) {
+                Sprite s = Resources.Load<Sprite>($"Card Images/{card.id}");
+                noSprite = s == null;
+                Resources.UnloadAsset(s);
+            }
+
+            // display warning
+            if (noSprite) {
+                GUIStyle style = new GUIStyle();
+                style.fontStyle = FontStyle.Italic;
+                style.normal.textColor = Color.red;
+                EditorGUILayout.LabelField($"No image for this ID found. Expecting to find 'Card Images/{card.id}' in a Resources folder", style);
+            }
+        }
+
+        bool CheckFoldout(string label) {
+            // create if doesn't exist
+            if (!foldoutCache.ContainsKey(label)) {
+                foldoutCache.Add(label, false);
+            }
+
+            // foldout field
+            return EditorGUILayout.Foldout(foldoutCache[label], label);
+        }
+
+        T DisplayFlagsAsToggles<T>(T value, string label) where T : Enum {
+            if (!CheckFoldout(label)) {
+                // foldout closed, skip
+                return value;
+            }
+            
+            // can't work with Enum, so convert to int
+            int result = Convert.ToInt32(value);
+
+            foreach (int t in (int[])Enum.GetValues(typeof(T))) {
+                if (t == 0) {
+                    // skip 'none'
+                    continue;
+                }
+
+                // format + toggle
+                EditorGUILayout.BeginHorizontal();
+                bool valid = EditorGUILayout.Toggle(" ", (result & t) == t, GUILayout.ExpandWidth(false));
+                EditorGUILayout.LabelField(Enum.GetName(typeof(T), t));
+                EditorGUILayout.EndHorizontal();
+
+                // update result
+                if (valid) {
+                    result |= t;
+                }
+                else if ((result & t) == t) {
+                    // deselect value
+                    result &= ~t;
+                }
+            }
+
+            // cast back to correct type
+            return (T)Enum.ToObject(typeof(T), result);
+        }
+
+
+        T DisplayEnumAsToggles<T>(T value, string label) where T : Enum {
+            if (!CheckFoldout(label)) {
+                // foldout closed, skip
+                return value;
+            }
+
+            // can't work with Enum, so convert to ints
+            int orig = Convert.ToInt32(value);
+            int result = orig;
+            
+            foreach (int t in (int[])Enum.GetValues(typeof(T))) {
+                if (t == 0) {
+                    // skip 'none'
+                    continue;
+                }
+                string enumName = Enum.GetName(typeof(T), t);
+                if (enumName == "all") {
+                    // can only select single value, 'all' makes no sense here
+                    continue;
+                }
+
+                // format + toggle
+                EditorGUILayout.BeginHorizontal();
+                bool valid = EditorGUILayout.Toggle(" ", (result & t) == t, GUILayout.ExpandWidth(false));
+                EditorGUILayout.LabelField(enumName);
+                EditorGUILayout.EndHorizontal();
+
+                if (valid && t != orig) {
+                    // t != orig is to stop original selection from ovverriding result
+                    result = t;
+                }
+            }
+
+            return (T)Enum.ToObject(typeof(T), result);
+        }
+
+       
+        //******************************************************************************************
+        // Persist state between sessions
+        //******************************************************************************************
+
+        void OnEnable() {
+            var cardJson = EditorPrefs.GetString("Card Maker Data", card.ToJson());
+            card = CardData.FromJson(cardJson);
+        }
+
+        void OnDisable() {
+            var data = card.ToJson();
+            EditorPrefs.SetString("Card Maker Data", data);
+
+        }
+    }
+}
