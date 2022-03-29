@@ -11,6 +11,7 @@ namespace Game {
     /// </summary>
     public class CardMakerWindow : EditorWindow {
         // cache
+        [SerializeField]
         CardData card = new CardData();
         Dictionary<string, bool> foldoutCache = new Dictionary<string, bool>();
         Vector2 scroll;
@@ -28,9 +29,13 @@ namespace Game {
 
         void OnGUI() {
             scroll = EditorGUILayout.BeginScrollView(scroll);
+            Undo.RecordObject(this, "edit card");
+
+            // TODO - load existing card (for modifications or shortcut to similar cards)
             CommonData();
             MonsterData();
             CreateCardDataButton();
+
             EditorGUILayout.EndScrollView();
         }
         void CommonData() {
@@ -81,13 +86,25 @@ namespace Game {
                 return;
             }
 
-            // TODO cconfirmation popup that displays all information succinctly 
 
+            // Check if file exists
             string path = Application.dataPath + $"/Resources/Card Data/{card.id}.json";
             bool alreadyExist = File.Exists(path);
 
-            // TODO if alreadyExist, confirmation popup to override existing file
-            File.WriteAllText(path, card.ToJson());
+            if (alreadyExist) {
+                // check with user before replacing file
+                bool replace = EditorUtility.DisplayDialog(
+                    $"Card {card.id} already exists",
+                    "Do you want to overwrite existing Card?",
+                    "Replace Card",
+                    "Do Not Replace");
+                if (replace) {
+                    File.WriteAllText(path, card.ToJson());
+                }
+            }
+            else {
+                File.WriteAllText(path, card.ToJson());
+            }
         }
 
         //******************************************************************************************
@@ -124,7 +141,9 @@ namespace Game {
             }
 
             // foldout field
-            return EditorGUILayout.Foldout(foldoutCache[label], label);
+            bool result = EditorGUILayout.Foldout(foldoutCache[label], label);
+            foldoutCache[label] = result;
+            return result;
         }
 
         T DisplayFlagsAsToggles<T>(T value, string label) where T : Enum {
@@ -132,7 +151,6 @@ namespace Game {
                 // foldout closed, skip
                 return value;
             }
-            
             // can't work with Enum, so convert to int
             int result = Convert.ToInt32(value);
 
