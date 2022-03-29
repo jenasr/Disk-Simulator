@@ -1,11 +1,11 @@
 {
-    "id": 21,
+    "id": 14,
     "name": "Test Card",
     "validZones": 3,
     "cardType": 1,
-    "monsterType": 28,
-    "attribute": 32,
+    "monsterType": 0,
+    "attribute": 0,
     "level": 3,
     "atk": 800,
-    "def": 271
+    "def": 253
 }

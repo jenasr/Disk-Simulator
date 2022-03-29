@@ -10,22 +10,34 @@ namespace Game {
     /// Window to help create new card data files easily
     /// </summary>
     public class CardMakerWindow : EditorWindow {
-        // cache
-        [SerializeField]
-        CardData card = new CardData();
-        Dictionary<string, bool> foldoutCache = new Dictionary<string, bool>();
-        Vector2 scroll;
-        bool noSprite = true;
-        int prevCardID = -1;
 
         [MenuItem("Window/Card Maker")]
         public static void ShowWindow() {
             GetWindow(typeof(CardMakerWindow));
         }
 
-        //******************************************************************************************
+        //**********************************************************************************************************************************
+        // Cache
+
+        //**********************************************************************************************************************************
+        [SerializeField]
+        CardData card = new CardData();
+        Dictionary<string, bool> foldoutCache = new Dictionary<string, bool>();
+        [NonSerialized]
+        Vector2 scroll;
+
+        [NonSerialized]
+        bool noSprite = true;
+
+        [NonSerialized]
+        bool fileExists = false;
+
+        [NonSerialized]
+        int prevCardID = -1;
+
+        //**********************************************************************************************************************************
         // GUI
-        //******************************************************************************************
+        //**********************************************************************************************************************************
 
         void OnGUI() {
             scroll = EditorGUILayout.BeginScrollView(scroll);
@@ -44,7 +56,7 @@ namespace Game {
             GUILayout.Label("Common Data", style);
 
             // fields
-            card.id = EditorGUILayout.IntField("ID", card.id);
+            IDField();
             NoSpriteWarning();
             card.name = EditorGUILayout.TextField("Name", card.name);
             card.validZones = DisplayFlagsAsToggles(card.validZones, "Valid Zones");
@@ -107,10 +119,45 @@ namespace Game {
             }
         }
 
-        //******************************************************************************************
+        //**********************************************************************************************************************************
         // GUI helper Functions
-        //******************************************************************************************
+        //**********************************************************************************************************************************
 
+        void IDField() {
+            EditorGUILayout.BeginHorizontal();
+            // ID field
+            card.id = EditorGUILayout.IntField("ID", card.id);
+            LoadCardFromID();
+            EditorGUILayout.EndHorizontal();
+        }
+        void LoadCardFromID() {
+            // cache
+            TextAsset t = null;
+
+            // check if file already exists
+            bool check =
+                prevCardID != card.id // change ID
+                || (UnityEngine.Random.value < .1f); // randomly check to see if sprite has been updated
+
+            //check
+            if (check) {
+                t = Resources.Load<TextAsset>($"Card Data/{card.id}");
+                fileExists = t != null;
+            }
+
+            // load card button
+            if (fileExists) {
+                bool load = GUILayout.Button("Load Card");
+                // TODO - maybe add confirmation dialog (existing car)
+                if (load) {
+                    card = CardData.FromJson(t.text);
+                }
+            }
+
+            if (t == null) {
+                Resources.UnloadAsset(t);
+            }
+        }
         void NoSpriteWarning() {
             // When to check
             bool check =
@@ -201,7 +248,6 @@ namespace Game {
                     // can only select single value, 'all' makes no sense here
                     continue;
                 }
-
                 // format + toggle
                 EditorGUILayout.BeginHorizontal();
                 bool valid = EditorGUILayout.Toggle(" ", (result & t) == t, GUILayout.ExpandWidth(false));
@@ -209,7 +255,7 @@ namespace Game {
                 EditorGUILayout.EndHorizontal();
 
                 if (valid && t != orig) {
-                    // t != orig is to stop original selection from ovverriding result
+                    // t != orig is to stop original selection from overriding result
                     result = t;
                 }
             }
@@ -217,10 +263,10 @@ namespace Game {
             return (T)Enum.ToObject(typeof(T), result);
         }
 
-       
-        //******************************************************************************************
+
+        //**********************************************************************************************************************************
         // Persist state between sessions
-        //******************************************************************************************
+        //**********************************************************************************************************************************
 
         void OnEnable() {
             var cardJson = EditorPrefs.GetString("Card Maker Data", card.ToJson());
