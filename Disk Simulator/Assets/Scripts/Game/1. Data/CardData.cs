@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-namespace Game {
+namespace YuGiOh {
     [System.Serializable]
     public class CardData {
         public int id;

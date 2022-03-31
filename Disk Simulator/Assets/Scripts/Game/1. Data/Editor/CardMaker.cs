@@ -5,7 +5,7 @@ using System.IO;
 using System.Collections.Generic;
 
 
-namespace Game {
+namespace YuGiOh {
     /// <summary>
     /// Window to help create new card data files easily
     /// </summary>
@@ -13,7 +13,7 @@ namespace Game {
 
         [MenuItem("Window/Card Maker")]
         public static void ShowWindow() {
-            GetWindow(typeof(CardMakerWindow));
+            GetWindow< CardMakerWindow>("Card Maker");
         }
 
         //**********************************************************************************************************************************

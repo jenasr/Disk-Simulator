@@ -1,0 +1,11 @@
+{
+    "id": 1,
+    "name": "Test Monster",
+    "validZones": 15,
+    "cardType": 1,
+    "monsterType": 268,
+    "attribute": 32,
+    "level": 4,
+    "atk": 1000,
+    "def": 1000
+}

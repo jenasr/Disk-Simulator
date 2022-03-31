@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 
-namespace Game {
+namespace YuGiOh {
     /// <summary>
     /// Lazy-loads each sprite and caches it
     /// </summary>

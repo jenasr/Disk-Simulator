@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Game {
+namespace YuGiOh {
     [Flags]
     public enum Attribute {
         none = 0,

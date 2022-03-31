@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Game {
+namespace YuGiOh {
     [Flags]
     public enum MonsterType {
         none = 0,
