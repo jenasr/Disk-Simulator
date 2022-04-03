@@ -18,10 +18,30 @@ namespace YuGiOh {
 
         private GameEvents(Game g) { }
 
-
+        public ZoneEvents zoneEvents = new ZoneEvents();
         public CardActionEvents cardActions = new CardActionEvents();
         public PrePostExecutionEvents<CardEntity> cardAddedToPlayersHand;
         public PrePostExecutionEvents<CardEntity> cardModified;
+    }
+
+    // Wrapper for Zone events
+    public class ZoneEvents {
+        Dictionary<Zone, LeaveEnter> _cardEvents = new Dictionary<Zone, LeaveEnter>();
+
+        public LeaveEnter this[Zone z] {
+            get {
+                if (!_cardEvents.ContainsKey(z)) {
+                    _cardEvents.Add(z, new LeaveEnter() { OnEnter=new PrePostExecutionEvents<CardEntity>(), OnLeave=new PrePostExecutionEvents<CardEntity> ()});
+                }
+
+                return _cardEvents[z];
+            }
+        }
+
+        public struct LeaveEnter {
+            public PrePostExecutionEvents<CardEntity> OnEnter;
+            public PrePostExecutionEvents<CardEntity> OnLeave;
+        }
     }
 
     // Wraps a dictionary

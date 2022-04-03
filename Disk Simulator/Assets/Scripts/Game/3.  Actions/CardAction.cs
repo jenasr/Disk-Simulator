@@ -15,7 +15,19 @@ namespace YuGiOh {
             CardAction<ToFacedownAction>.action,
             CardAction<ToFacedownSidewaysAction>.action,
             CardAction<ToFaceupAction>.action,
-            CardAction<ToFaceupSidewaysAction>.action
+            CardAction<ToFaceupSidewaysAction>.action,
+
+            CardAction<ToDeckCardAction>.action,
+            CardAction<ToFieldCardAction>.action,
+            CardAction<ToGraveyardCardAction>.action,
+            CardAction<ToHandCardAction>.action,
+
+            CardAction<ToMonsterUpCardAction>.action,
+            CardAction<ToMonsterSidewaysCardAction>.action,
+            CardAction<ToMonsterDownCardAction>.action,
+
+            CardAction<ToSpellUpCardAction>.action,
+            CardAction<ToSpellDownCardAction>.action,
         };
 
         //**********************************************************************************************************************
@@ -28,16 +40,27 @@ namespace YuGiOh {
         public abstract void Execute(Game g, CardEntity c);
         public abstract CardAction GetUndo(Game g, CardEntity c);
 
-        public void ExecuteWithEventCallbacks(Game g, CardEntity c) {
-            var events = GameEvents.GetEvents(g).cardActions[this];
-            var events2 = GameEvents.GetEvents(g).cardModified;
+        public virtual GameEvents PreExecuteEvents(Game g, CardEntity c) {
+            var result = GameEvents.GetEvents(g);
+            var events = result.cardActions[this];
+            var events2 = result.cardModified;
 
             events.InvokePre(c);
             events2.InvokePre(c);
-            Execute(g, c);
+            return result;
+        }
+        public virtual GameEvents PostExecuteEvents(Game g, CardEntity c) {
+            var result = GameEvents.GetEvents(g);
+            var events = result.cardActions[this];
+            var events2 = result.cardModified;
+
             events.InvokePost(c);
             events2.InvokePost(c);
+            return result;
         }
+
+        public virtual void OnRemove() { }
+       
 
         //**********************************************************************************************************************
         // Game Action Wrapper
@@ -64,12 +87,15 @@ namespace YuGiOh {
 
 
             public override void Execute() {
-                a.ExecuteWithEventCallbacks(g, c);
+                a.PreExecuteEvents(g, c);
+                a.Execute(g, c);
+                a.PostExecuteEvents(g, c);
             }
             public override GameAction GetUndo() {
                 return a.GetUndo(g, c).AsGameAction(g, c);
             }
             public override void OnRemove() {
+                a.OnRemove();
                 a = null;
                 _pool.Return(this);
             }

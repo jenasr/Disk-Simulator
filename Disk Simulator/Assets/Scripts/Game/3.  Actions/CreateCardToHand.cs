@@ -12,6 +12,7 @@
 
         public override void Execute() {
             GameEvents.GetEvents(g).cardAddedToPlayersHand.InvokePre(c);
+            c.zonePlacement = g.players[player].hand.Count;
             g.players[player].hand.Add(c);
             c.zone = Zone.hand;
             c.orientation = CardOrientation.faceup; // should this be facedown
@@ -41,7 +42,7 @@
                 // card does not exist
                 c.c.zone = Zone.none;
                 
-                // no need to set other values
+                // no need to reset other values, or do we?
             }
 
             public override GameAction GetUndo() {

@@ -10,7 +10,6 @@ namespace YuGiOh {
         public CardEntity[] spellZone = new CardEntity[Constants.NUM_SPELL_ZONE];
         public List<CardEntity> graveyard = new List<CardEntity>();
         public List<CardEntity> hand = new List<CardEntity>();
-
         // no need to track decks
     }
 }

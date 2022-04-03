@@ -7,7 +7,6 @@ public class Game_CardBehaviour : MonoBehaviour {
     Game_MainBehaviour m;
     CardEntity c;
 
-
     private void Awake() {
         sr = GetComponent<SpriteRenderer>();
     }
@@ -19,6 +18,7 @@ public class Game_CardBehaviour : MonoBehaviour {
     }
 
     public void UpdateBehaviour() {
+        // set position
         switch (c.zone) {
             case Zone.none:
                 throw new System.ArgumentException("Card has 'none' zone");
@@ -31,9 +31,11 @@ public class Game_CardBehaviour : MonoBehaviour {
             case Zone.graveyard:
                 throw new System.NotImplementedException();
             case Zone.monster:
-                throw new System.NotImplementedException();
+                transform.position = m.player1.monsterZones[c.zonePlacement].transform.position;
+                break;
             case Zone.spell:
-                throw new System.NotImplementedException();
+                transform.position = m.player1.spellZones[c.zonePlacement].transform.position;
+                break;
             case Zone.field:
                 throw new System.NotImplementedException();
             case Zone.all:
@@ -63,4 +65,3 @@ public class Game_CardBehaviour : MonoBehaviour {
         }
     }
 }
-

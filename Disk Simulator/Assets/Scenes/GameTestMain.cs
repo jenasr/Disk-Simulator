@@ -23,7 +23,7 @@ public class GameTestMain : MonoBehaviour {
         print("Create Card");
         yield return new WaitForSeconds(1);
 
-        var a = CardAction<ToFaceupSidewaysAction>.action.AsGameAction(g, card);
+        var a = CardAction<ToMonsterUpCardAction>.action.AsGameAction(g, card);
         gas.Add(a);
         a.Execute();
         print("Sideways");

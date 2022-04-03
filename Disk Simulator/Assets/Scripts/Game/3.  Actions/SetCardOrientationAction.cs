@@ -1,4 +1,7 @@
-﻿namespace YuGiOh {
+﻿using System.Linq;
+
+
+namespace YuGiOh {
 
     public abstract class SetCardOrientationAction : CardAction {
         CardOrientation orientation;
@@ -41,25 +44,25 @@
 
         public ToFaceupAction() : base(CardOrientation.faceup) { }
     }
-
+    
     public class ToFacedownAction : SetCardOrientationAction {
         public override string Name(Game g, CardEntity c) => "To Facedown";
         public override string DisplayText(Game g, CardEntity c) => "Set card to facedown";
 
         public ToFacedownAction() : base(CardOrientation.facedown) { }
     }
+    
     public class ToFaceupSidewaysAction : SetCardOrientationAction {
         public override string Name(Game g, CardEntity c) => "To Faceup Sideways";
         public override string DisplayText(Game g, CardEntity c) => "Set card to faceup sideways";
 
         public ToFaceupSidewaysAction() : base(CardOrientation.faceupideways) { }
     }
-
+    
     public class ToFacedownSidewaysAction : SetCardOrientationAction {
         public override string Name(Game g, CardEntity c) => "To Facedown Sideways";
         public override string DisplayText(Game g, CardEntity c) => "Set card to facedown sideways";
 
         public ToFacedownSidewaysAction() : base(CardOrientation.facedownsideways) { }
     }
-
 }
