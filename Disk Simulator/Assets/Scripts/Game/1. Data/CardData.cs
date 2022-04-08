@@ -6,7 +6,7 @@ namespace YuGiOh {
     public class CardData {
         public int id;
         public string name;
-        public Zone validZones = Zone.hand | Zone.deck | Zone.graveyard;
+        public ZoneType validZones = ZoneType.hand | ZoneType.deck | ZoneType.graveyard;
         public CardType cardType;
 
         // monster only

@@ -16,32 +16,13 @@ public class Game_CardBehaviour : MonoBehaviour {
         this.m = m;
         this.c = c;
     }
+    
+    void Update() {
+        SetPosition();
+        SetOrientation();
+    }
 
-    public void UpdateBehaviour() {
-        // set position
-        switch (c.zone) {
-            case Zone.none:
-                throw new System.ArgumentException("Card has 'none' zone");
-            case Zone.deck:
-                throw new System.NotImplementedException();
-            case Zone.hand:
-                // TODO - set to hand position
-                transform.position = Vector3.zero;
-                break;
-            case Zone.graveyard:
-                throw new System.NotImplementedException();
-            case Zone.monster:
-                transform.position = m.player1.monsterZones[c.zonePlacement].transform.position;
-                break;
-            case Zone.spell:
-                transform.position = m.player1.spellZones[c.zonePlacement].transform.position;
-                break;
-            case Zone.field:
-                throw new System.NotImplementedException();
-            case Zone.all:
-                throw new System.NotImplementedException();
-        }
-
+    void SetOrientation() {
         // TODO - set face down sprite
         switch (c.orientation) {
             case CardOrientation.faceup:
@@ -63,5 +44,33 @@ public class Game_CardBehaviour : MonoBehaviour {
             default:
                 break;
         }
+    }
+    void SetPosition() {
+        // set position
+        switch (c.zone) {
+            case ZoneType.none:
+                throw new System.ArgumentException("Card has 'none' zone");
+            case ZoneType.deck:
+                throw new System.NotImplementedException();
+            case ZoneType.hand:
+                // TODO - set to hand position
+                transform.position = Vector3.zero;
+                break;
+            case ZoneType.graveyard:
+                // TODO - set sprite sorting order
+                transform.position = m.player1.graveyardZone.transform.position;
+                break;
+            case ZoneType.monster:
+                transform.position = m.player1.monsterZones[c.zonePlacement].transform.position;
+                break;
+            case ZoneType.spell:
+                transform.position = m.player1.spellZones[c.zonePlacement].transform.position;
+                break;
+            case ZoneType.field:
+                throw new System.NotImplementedException();
+            case ZoneType.all:
+                throw new System.NotImplementedException();
+        }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using LPE;
+using System.Collections;
 
 namespace YuGiOh {
     public class Player {
@@ -6,10 +7,10 @@ namespace YuGiOh {
         public int playerNum;
 
         // cards in play - TODO create a wrapper for each of these, hide underlying collection, include methods for manipulation
-        public CardEntity[] monsterZone = new CardEntity[Constants.NUM_MONSTER_ZONE];
-        public CardEntity[] spellZone = new CardEntity[Constants.NUM_SPELL_ZONE];
-        public List<CardEntity> graveyard = new List<CardEntity>();
-        public List<CardEntity> hand = new List<CardEntity>();
+        public MonsterSpellZone monsterZone = new MonsterSpellZone(ZoneType.monster);
+        public MonsterSpellZone spellZone = new MonsterSpellZone(ZoneType.spell);
+        public GraveyardZone graveyard = new GraveyardZone();
+        public HandZone hand = new HandZone();
         // no need to track decks
     }
 }

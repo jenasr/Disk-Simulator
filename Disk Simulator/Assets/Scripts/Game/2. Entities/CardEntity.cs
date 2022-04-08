@@ -2,7 +2,7 @@
     public class CardEntity {
         public CardData data;
         public CardOrientation orientation = CardOrientation.faceup;
-        public Zone zone = Zone.none;
+        public ZoneType zone = ZoneType.none;
         public int zonePlacement;
         
         public int owner;       // does not change 

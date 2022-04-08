@@ -14,11 +14,9 @@ namespace YuGiOh {
 
         public void Init(Game g) {
             this.g = g;
-            GameEvents.GetEvents(g).cardAddedToPlayersHand.OnPostExecute += CreateCard;
-            GameEvents.GetEvents(g).cardModified.OnPostExecute += UpdateCard;
         }
 
-        void CreateCard(CardEntity c) {
+        public void CreateCard(CardEntity c) {
             var behaviour = Instantiate(cardSrc);
             behaviour.gameObject.SetActive(true);
 
@@ -27,10 +25,6 @@ namespace YuGiOh {
             // TODO - set to hand position
             behaviour.transform.position = Vector3.zero;
             card2behaviour.Add(c, behaviour);
-        }
-
-        void UpdateCard(CardEntity c) {
-            card2behaviour[c].UpdateBehaviour();
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace YuGiOh {
     [Flags]
-    public enum Zone {
+    public enum ZoneType {
         none = 0,
         deck = 1 << 0,
         hand = 1 << 1,
@@ -13,13 +13,13 @@ namespace YuGiOh {
         all = (1 << 6) - 1
     }
 
-    public static class ZoneExtensions {
-        public static CardOrientation ValidOrientations(this Zone z) {
+    public static class ZoneTypeExtensions {
+        public static CardOrientation ValidOrientations(this ZoneType z) {
             CardOrientation result = 0;
-            const Zone validFaceupZones = Zone.monster | Zone.graveyard | Zone.field | Zone.spell;
-            const Zone validFacedownZones = Zone.spell | Zone.hand; // monster zone?
-            const Zone validSidewaysZones = Zone.monster;
-            const Zone validFacedownSidewaysZones = Zone.monster;
+            const ZoneType validFaceupZones = ZoneType.monster | ZoneType.graveyard | ZoneType.field | ZoneType.spell;
+            const ZoneType validFacedownZones = ZoneType.spell | ZoneType.hand; // monster zone?
+            const ZoneType validSidewaysZones = ZoneType.monster;
+            const ZoneType validFacedownSidewaysZones = ZoneType.monster;
 
             if ((z & validFaceupZones) != 0) {
                 result |= CardOrientation.faceup;
