@@ -1,0 +1,11 @@
+{
+    "id": 2124,
+    "name": "Monster Card A",
+    "validZones": 15,
+    "cardType": 1,
+    "monsterType": 1048578,
+    "attribute": 16,
+    "level": 7,
+    "atk": 3500,
+    "def": 1700
+}

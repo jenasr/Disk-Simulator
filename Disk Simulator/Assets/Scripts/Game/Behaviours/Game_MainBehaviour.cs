@@ -10,6 +10,8 @@ namespace YuGiOh {
 
         Game g;
         Dictionary<CardEntity, Game_CardBehaviour> card2behaviour = new Dictionary<CardEntity, Game_CardBehaviour>();
+
+
         public void Init(Game g) {
             this.g = g;
             GameEvents.GetEvents(g).cardAddedToPlayersHand.OnPostExecute += CreateCard;
@@ -26,6 +28,7 @@ namespace YuGiOh {
             behaviour.transform.position = Vector3.zero;
             card2behaviour.Add(c, behaviour);
         }
+
         void UpdateCard(CardEntity c) {
             card2behaviour[c].UpdateBehaviour();
         }
