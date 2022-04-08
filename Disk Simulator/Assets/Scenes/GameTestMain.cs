@@ -31,7 +31,7 @@ public class GameTestMain : MonoBehaviour {
         yield return new WaitForSeconds(1);
 
 
-        a = CardAction<ToFacedownAction>.action.AsGameAction(g, card);
+        a = SetCardOrientationAction.Get(card, CardOrientation.facedown); 
         gas.Add(a);
         a.Execute();
         print("Facedown");

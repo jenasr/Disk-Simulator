@@ -12,11 +12,6 @@ namespace YuGiOh {
 
     public abstract class CardAction {
         public static CardAction[] all = {
-            CardAction<ToFacedownAction>.action,
-            CardAction<ToFacedownSidewaysAction>.action,
-            CardAction<ToFaceupAction>.action,
-            CardAction<ToFaceupSidewaysAction>.action,
-
             CardAction<ToDeckCardAction>.action,
             CardAction<ToFieldCardAction>.action,
             CardAction<ToGraveyardCardAction>.action,
