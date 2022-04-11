@@ -6,6 +6,7 @@ using YuGiOh;
 
 public class GameTestMain : MonoBehaviour {
     public Game_MainBehaviour gameBehaviour;
+    public ArdInput ardInputBehaviour;
     Game g;
     GameActionStack gas = new GameActionStack();
 
@@ -18,11 +19,35 @@ public class GameTestMain : MonoBehaviour {
         // create cards
         print("Creating cards");
         CardEntity card1 = new CardEntity();
-        card1.data = CardData.FromJson(Resources.Load<TextAsset>("Card Data/1").text);
+        while (true)
+        {
+            if (ardInputBehaviour.HasCard())
+            {
+                break;
+            }
+            yield return null;
+        }
+        card1.data = CardData.FromJson(Resources.Load<TextAsset>($"Card Data/{ardInputBehaviour.GetCardId()}").text);
         CardEntity card2 = new CardEntity();
-        card2.data = CardData.FromJson(Resources.Load<TextAsset>("Card Data/2").text);
+        while (true)
+        {
+            if (ardInputBehaviour.HasCard())
+            {
+                break;
+            }
+            yield return null;
+        }
+        card2.data = CardData.FromJson(Resources.Load<TextAsset>($"Card Data/{ardInputBehaviour.GetCardId()}").text);
         CardEntity card3 = new CardEntity();
-        card3.data = CardData.FromJson(Resources.Load<TextAsset>("Card Data/3").text);
+        while (true)
+        {
+            if (ardInputBehaviour.HasCard())
+            {
+                break;
+            }
+            yield return null;
+        }
+        card3.data = CardData.FromJson(Resources.Load<TextAsset>($"Card Data/{ardInputBehaviour.GetCardId()}").text);
         yield return new WaitForSeconds(1);
 
 
