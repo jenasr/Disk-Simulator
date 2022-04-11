@@ -1,0 +1,11 @@
+{
+    "id": 32339440,
+    "name": "Bujin Yamato",
+    "validZones": 15,
+    "cardType": 1,
+    "monsterType": 4,
+    "attribute": 16,
+    "level": 4,
+    "atk": 1800,
+    "def": 200
+}

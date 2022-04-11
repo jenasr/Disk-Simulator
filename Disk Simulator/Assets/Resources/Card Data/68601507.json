@@ -1,0 +1,11 @@
+{
+    "id": 68601507,
+    "name": "Bujingi Crane",
+    "validZones": 15,
+    "cardType": 1,
+    "monsterType": 2097152,
+    "attribute": 16,
+    "level": 4,
+    "atk": 1600,
+    "def": 300
+}
