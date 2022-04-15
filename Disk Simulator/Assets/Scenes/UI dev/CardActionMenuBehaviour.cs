@@ -24,7 +24,7 @@ public class CardActionMenuBehaviour : MonoBehaviour {
 
     public void SetPostion() {
         rt.pivot = GetPivot();
-        rt.position = Input.mousePosition;
+        transform.position = Input.mousePosition;
     }
     public void AddOption(string text, GameAction action) {
         if (entries.Count == numEntries) {
@@ -33,6 +33,7 @@ public class CardActionMenuBehaviour : MonoBehaviour {
         }
 
         var e = entries[numEntries];
+
         e.text = text;
         e.action = action;
         e.selected = false;
@@ -45,11 +46,12 @@ public class CardActionMenuBehaviour : MonoBehaviour {
     public void ClearOptions() {
         foreach (var e in entries) {
             if (!e.selected) {
-                e?.action.Return();
-                e.button.gameObject.SetActive(false);
+                e?.action?.Return();
             }
+            e.button.gameObject.SetActive(false);
             e.action = null;
         }
+        numEntries = 0;
     }
 
 

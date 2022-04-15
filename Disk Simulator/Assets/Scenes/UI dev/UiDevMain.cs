@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using YuGiOh;
 
 
 public class UiDevMain : MonoBehaviour {
     public CardActionMenuBehaviour cardActionMenuBehaviour;
     public Game_MainBehaviour gameBehaviour;
-
+    public Button backgroundButton;
     Game g;
     GameActionStack gas;
 
@@ -23,7 +24,9 @@ public class UiDevMain : MonoBehaviour {
         };
 
         CreateInitialCards();
-
+        backgroundButton.onClick.AddListener(()=> {
+            cardActionMenuBehaviour.ClearOptions();
+        });
         yield return null;
     }
 
@@ -67,6 +70,7 @@ public class UiDevMain : MonoBehaviour {
     }
 
     void OnClickCard(CardEntity c) {
+        cardActionMenuBehaviour.ClearOptions();
         cardActionMenuBehaviour.AddOption("Bye", null);
         cardActionMenuBehaviour.SetPostion();
     }
