@@ -19,8 +19,8 @@ public class UiDevMain : MonoBehaviour {
         gameBehaviour.Init(g);
 
         cardActionMenuBehaviour.OnActionSelect += (a) => {
-            // gas.AddExecute(a); // not ready yet
-            print(a); 
+            gas.AddExecute(a);
+            cardActionMenuBehaviour.ClearOptions();
         };
 
         CreateInitialCards();
@@ -71,7 +71,12 @@ public class UiDevMain : MonoBehaviour {
 
     void OnClickCard(CardEntity c) {
         cardActionMenuBehaviour.ClearOptions();
-        cardActionMenuBehaviour.AddOption("Bye", null);
+
+        // TODO - Get available Options
+        cardActionMenuBehaviour.AddOption("To Monster Zone", ToZoneCardAction.Get(g, c, ZoneType.monster));
+        cardActionMenuBehaviour.AddOption("To Spell Zone", ToZoneCardAction.Get(g, c, ZoneType.spell));
+
+
         cardActionMenuBehaviour.SetPostion();
     }
 }
