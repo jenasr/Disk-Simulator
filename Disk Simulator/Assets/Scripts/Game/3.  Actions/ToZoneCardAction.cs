@@ -70,7 +70,7 @@ namespace YuGiOh {
             return Get(g, targetEntity, targetEntity.zone, targetEntity.zonePlacement);
         }
 
-        public override void OnRemove() {
+        public override void Return() {
             _pool.Return(this);
         }
     }

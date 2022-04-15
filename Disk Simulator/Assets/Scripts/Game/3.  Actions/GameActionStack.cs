@@ -12,6 +12,10 @@ namespace YuGiOh {
         List<StackEntry> actions = new List<StackEntry>();
         int lastAction = -1;
 
+        public void AddExecute(GameAction a) {
+            Add(a);
+            a.Execute();
+        }
         public void Add(GameAction g) {
             lastAction++;
             if (lastAction == actions.Count) {
@@ -21,8 +25,8 @@ namespace YuGiOh {
             else {
                 // clear entries
                 for (int i = lastAction; i < actions.Count; i++) {
-                    actions[i].redo.OnRemove();
-                    actions[i].undo.OnRemove();
+                    actions[i].redo.Return();
+                    actions[i].undo.Return();
                 }
 
                 // add action

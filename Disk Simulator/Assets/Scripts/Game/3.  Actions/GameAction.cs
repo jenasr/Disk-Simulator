@@ -6,7 +6,7 @@
         /// <summary>
         /// No longer part of the GameActionStack
         /// </summary>
-        public virtual void OnRemove() { }
+        public virtual void Return() { }
     }
 
 }

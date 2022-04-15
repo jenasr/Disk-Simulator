@@ -24,7 +24,7 @@ namespace YuGiOh {
             return Get(targetEntity, targetEntity.orientation);
         }
 
-        public override void OnRemove() {
+        public override void Return() {
             _pool.Return(this);
         }
     }

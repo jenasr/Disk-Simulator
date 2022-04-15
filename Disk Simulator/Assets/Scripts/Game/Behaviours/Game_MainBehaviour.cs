@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 
 namespace YuGiOh {
@@ -16,11 +17,11 @@ namespace YuGiOh {
             this.g = g;
         }
 
-        public void CreateCard(CardEntity c) {
+        public void CreateCard(CardEntity c, Action<CardEntity> clickCB = null) {
             var behaviour = Instantiate(cardSrc);
             behaviour.gameObject.SetActive(true);
 
-            behaviour.SetCard(this, c);
+            behaviour.SetCard(this, c, clickCB);
 
             // TODO - set to hand position
             behaviour.transform.position = Vector3.zero;

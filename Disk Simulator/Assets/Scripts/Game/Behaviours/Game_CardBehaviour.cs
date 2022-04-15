@@ -1,27 +1,29 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using YuGiOh;
+using System;
+using System.Collections.Generic;
 
 
-public class Game_CardBehaviour : MonoBehaviour {
+public class Game_CardBehaviour : MonoBehaviour, IPointerClickHandler {
+
     SpriteRenderer sr;
     Game_MainBehaviour m;
+    Action<CardEntity> clickCB;
     CardEntity c;
+
 
     private void Awake() {
         sr = GetComponent<SpriteRenderer>();
     }
 
-    public void SetCard(Game_MainBehaviour m, CardEntity c) {
-        sr.sprite = c.data.GetSprite();
-        this.m = m;
-        this.c = c;
-    }
     
     void Update() {
         SetPosition();
         SetOrientation();
-    }
+    }   
 
+ 
     void SetOrientation() {
         // TODO - set face down sprite
         switch (c.orientation) {
@@ -72,5 +74,21 @@ public class Game_CardBehaviour : MonoBehaviour {
                 throw new System.NotImplementedException();
         }
 
+    }
+    public void SetCard(Game_MainBehaviour m, CardEntity c, Action<CardEntity> clickCB) {
+        sr.sprite = c.data.GetSprite();
+        this.m = m;
+        this.c = c;
+        this.clickCB = clickCB;
+
+
+        // TODO - Make more efficient
+        var shape = new List<Vector2>();
+        sr.sprite.GetPhysicsShape(0, shape);
+        GetComponent<PolygonCollider2D>().SetPath(0, shape.ToArray());
+    }
+
+    public void OnPointerClick(PointerEventData eventData) {
+        clickCB?.Invoke(c);
     }
 }
