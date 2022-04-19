@@ -48,6 +48,7 @@ public class Game_CardBehaviour : MonoBehaviour, IPointerClickHandler {
         }
     }
     void SetPosition() {
+        var player = c.controller == 0 ? m.player1 : m.player2;
         // set position
         switch (c.zone) {
             case ZoneType.none:
@@ -60,13 +61,13 @@ public class Game_CardBehaviour : MonoBehaviour, IPointerClickHandler {
                 break;
             case ZoneType.graveyard:
                 // TODO - set sprite sorting order
-                transform.position = m.player1.graveyardZone.transform.position;
+                transform.position = player.graveyardZone.transform.position;
                 break;
             case ZoneType.monster:
-                transform.position = m.player1.monsterZones[c.zonePlacement].transform.position;
+                transform.position = player.monsterZones[c.zonePlacement].transform.position;
                 break;
             case ZoneType.spell:
-                transform.position = m.player1.spellZones[c.zonePlacement].transform.position;
+                transform.position = player.spellZones[c.zonePlacement].transform.position;
                 break;
             case ZoneType.field:
                 throw new System.NotImplementedException();

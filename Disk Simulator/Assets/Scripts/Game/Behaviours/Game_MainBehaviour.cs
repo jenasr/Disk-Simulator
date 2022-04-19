@@ -16,7 +16,6 @@ namespace YuGiOh {
         public void Init(Game g) {
             this.g = g;
         }
-
         public void CreateCard(CardEntity c, Action<CardEntity> clickCB = null) {
             var behaviour = Instantiate(cardSrc);
             behaviour.gameObject.SetActive(true);

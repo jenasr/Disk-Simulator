@@ -2523,11 +2523,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterZones:
-  - {fileID: 321915414}
-  - {fileID: 1696269897}
   - {fileID: 1827826636}
   - {fileID: 2128599469}
+  - {fileID: 1696269897}
   - {fileID: 441670239}
+  - {fileID: 321915414}
   spellZones:
   - {fileID: 788860440}
   - {fileID: 898216060}

@@ -18,7 +18,6 @@ namespace YuGiOh {
 
         //**********************************************************************************************************************************
         // Cache
-
         //**********************************************************************************************************************************
         [SerializeField]
         CardData card = new CardData();
@@ -150,6 +149,7 @@ namespace YuGiOh {
                 bool load = GUILayout.Button("Load Card");
                 // TODO - maybe add confirmation dialog (existing car)
                 if (load) {
+                    t = Resources.Load<TextAsset>($"Card Data/{card.id}");
                     card = CardData.FromJson(t.text);
                 }
             }
