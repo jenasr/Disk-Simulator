@@ -3,6 +3,13 @@
 public static class InputManager {
     static bool no = false;
 
+    //*************************************************************************************************
+    // Inputs
+    //*************************************************************************************************
+    // yes => has there been input since last frame
+    // {value} => input parameter
+
+
     public static class ActionRequested {
         public static bool yes;
         public static GameAction action;
@@ -22,6 +29,10 @@ public static class InputManager {
         public static CardEntity card;
     }
 
+    //*************************************************************************************************
+    // Registers an input
+    //*************************************************************************************************
+
     public static class Set {
         public static void ActionRequested(GameAction action) {
             InputManager.ActionRequested.yes = true;
@@ -39,6 +50,12 @@ public static class InputManager {
             InputManager.CardSelected.card = card;
         }
     }
+
+
+    //*************************************************************************************************
+    // Clears input
+    //*************************************************************************************************
+    // call after all input has been process, usually at the end of frame
 
     public static void Clear() {
         ActionRequested.yes = no;

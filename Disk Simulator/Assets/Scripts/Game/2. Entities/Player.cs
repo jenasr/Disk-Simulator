@@ -12,5 +12,20 @@ namespace YuGiOh {
         public GraveyardZone graveyard = new GraveyardZone();
         public HandZone hand = new HandZone();
         // no need to track decks
+
+        public Zone GetZone(ZoneType type) {
+            switch (type) {
+                case ZoneType.hand:
+                    return hand;
+                case ZoneType.graveyard:
+                    return graveyard;
+                case ZoneType.monster:
+                    return monsterZone;
+                case ZoneType.spell:
+                    return spellZone;
+                default:
+                    return null;
+            }
+        }
     }
 }

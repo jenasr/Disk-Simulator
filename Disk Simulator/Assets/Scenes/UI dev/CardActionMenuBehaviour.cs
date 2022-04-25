@@ -12,7 +12,6 @@ public class CardActionMenuBehaviour : MonoBehaviour {
     RectTransform rt;
     Vector3[] corners = new Vector3[4];
 
-    // Do not clear entries
     List<Entries> entries = new List<Entries>();
     int numEntries; 
 
@@ -25,6 +24,16 @@ public class CardActionMenuBehaviour : MonoBehaviour {
     public void SetPostion() {
         rt.pivot = GetPivot();
         transform.position = Input.mousePosition;
+    }
+    public void SetPostionCenter() {
+
+        var size = GetSizeOnScreen();
+
+        float x = Screen.width / 2;
+        float y = (Screen.height - size.y) / 2;
+
+        rt.pivot = new Vector2(.5f, .5f);
+        transform.position = new Vector3(x, y);
     }
     public void AddOption(string text, GameAction action) {
         if (entries.Count == numEntries) {

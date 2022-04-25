@@ -1,7 +1,8 @@
 ﻿using YuGiOh;
 
 public class GameStateController {
-    public WaitForInputState waitForInputState;
+    public WaitForInputState _waitForInputState;
+    public NewCardActionState _newCardActionState;
 
 
     public Game g;
@@ -15,12 +16,22 @@ public class GameStateController {
         actionStack = gas;
         references = refs;
 
-        waitForInputState = new WaitForInputState(this);
-
-        currentState = waitForInputState;
+        _waitForInputState = new WaitForInputState(this);
+        _newCardActionState = new NewCardActionState(this);
+        currentState = _waitForInputState;
     }
 
     public void Next() {
         currentState = currentState.Next() ?? currentState;
     }
+
+
+    public WaitForInputState WaitForInputState() {
+        return _waitForInputState;
+    }
+    public NewCardActionState NewCardActionState(CardEntity c) {
+        _newCardActionState.SetCard(c);
+        return _newCardActionState;
+    }
+
 }

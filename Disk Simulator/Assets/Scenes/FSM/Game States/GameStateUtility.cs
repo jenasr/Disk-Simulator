@@ -2,29 +2,26 @@
 using YuGiOh;
 
 public static class GameStateUtility {
-    public static void CreateNewCard(this GameStateController gsc, int id) {
-        CardEntity c = new CardEntity();
+    public static CardEntity CreateNewCard(this GameStateController gsc, int id) {
+        CardEntity result = new CardEntity();
 
-        c.data = CardData.FromJson(Resources.Load<TextAsset>($"Card Data/{id}").text);
-        gsc.references.gameBehaviour.CreateCard(c, (c) => InputManager.Set.CardSelected(c));
-        CreateCardToHand ccth1 = new CreateCardToHand(gsc.g, gsc.g.currentPlayer, c);
+        result.data = CardData.FromJson(Resources.Load<TextAsset>($"Card Data/{id}").text);
+        gsc.references.gameBehaviour.CreateCard(result, (c) => InputManager.Set.CardSelected(c));
+        CreateCardToHand ccth1 = new CreateCardToHand(gsc.g, gsc.g.currentPlayer, result);
         gsc.actionStack.AddExecute(ccth1);
 
-        // TODO - request action state
-        var tz1 = ToZoneCardAction.Get(gsc.g, c, ZoneType.monster);
-        gsc.actionStack.AddExecute(tz1);
+        return result;
     }
 
     public static void OpenCardActionMenu(this GameStateController gsc, CardEntity c) {
         gsc.references.cardActionMenuBehaviour.ClearOptions();
 
 
-        if (Input.GetMouseButtonUp(1)) {
-            var a = SetCardOrientationAction.Get(c, CardOrientation.faceup);
-
-            gsc.actionStack.AddExecute(a);
-            return;
-        }
+        //if (Input.GetMouseButtonUp(1)) {
+        //    var a = SetCardOrientationAction.Get(c, CardOrientation.faceup);
+        //    gsc.actionStack.AddExecute(a);
+        //    return;
+        //}
 
         if (c.zone == ZoneType.graveyard) {
             Debug.Log("Graveyard actions not implemented");
