@@ -20,11 +20,6 @@ public class ArdInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (has_Card)
-        {
-            return;
-        }
-
         if (sp.IsOpen)
         {
             try
