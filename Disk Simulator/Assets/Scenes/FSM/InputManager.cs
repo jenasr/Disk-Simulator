@@ -29,6 +29,11 @@ public static class InputManager {
         public static CardEntity card;
     }
 
+    public static class VoiceCommandRecieved {
+        public static bool yes;
+        public static VoiceCommandOption command;
+    }
+
     //*************************************************************************************************
     // Registers an input
     //*************************************************************************************************
@@ -49,6 +54,10 @@ public static class InputManager {
             InputManager.CardSelected.yes = true;
             InputManager.CardSelected.card = card;
         }
+        public static void VoiceCommandRecieved (VoiceCommandOption command) {
+            InputManager.VoiceCommandRecieved.yes = true;
+            InputManager.VoiceCommandRecieved.command = command;
+        }
     }
 
 
@@ -62,5 +71,6 @@ public static class InputManager {
         CancelRequested.yes = no;
         CardScanned.yes = no;
         CardSelected.yes = no;
+        VoiceCommandRecieved.yes = no;
     }
 }

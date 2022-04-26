@@ -22,6 +22,9 @@ public class FSMDevMain : MonoBehaviour {
     }
 
     void Update() {
+        if (InputManager.VoiceCommandRecieved.yes) {
+            print(InputManager.VoiceCommandRecieved.command.keywords[0]);
+        }
         if (Input.GetKeyDown(KeyCode.Q)) {
             InputManager.Set.CardScanned(3);
         }

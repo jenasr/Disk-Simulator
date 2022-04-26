@@ -3,7 +3,6 @@
 public static class CardOptionUtility {
     public static void AddOptions(Game g, CardEntity c, CardActionMenuBehaviour cardActionMenuBehaviour) {
         Player player = g.players[g.currentPlayer];
-
    
         AddToZoneOption(ZoneType.monster, "To Monster Zone");
         AddToZoneOption(ZoneType.spell, "To Spell Zone");
@@ -17,6 +16,7 @@ public static class CardOptionUtility {
         // orientations
         AddOrientationOption(CardOrientation.faceup, "To Face Up");
         AddOrientationOption(CardOrientation.facedown, "To Face Down");
+
 
         void AddToZoneOption(ZoneType z, string txt) {
             if (c.zone == z) {

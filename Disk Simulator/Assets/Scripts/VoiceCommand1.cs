@@ -5,6 +5,26 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Windows.Speech;
 
+
+public class VoiceCommandOption {
+    public static VoiceCommandOption SummonMonsterAtk = new VoiceCommandOption("I summon a monster in attack");
+    public static VoiceCommandOption SummonMonsterDef = new VoiceCommandOption("I summon a monster in defense");
+    
+    
+    public static VoiceCommandOption[] all = {
+        SummonMonsterAtk
+    };
+
+    public List<string> keywords;
+
+    VoiceCommandOption(params string[] keywords) {
+        this.keywords = new List<string>();
+        this.keywords.AddRange(keywords);
+    }
+}
+
+
+
 public class VoiceCommand1 : MonoBehaviour
 {
     private KeywordRecognizer keywordRecognizer;
@@ -13,6 +33,12 @@ public class VoiceCommand1 : MonoBehaviour
     private string text = "None";
     void Start()
     {
+        foreach (var vac in VoiceCommandOption.all) {
+            foreach (var kw in vac.keywords) {
+                actions.Add(kw, () => InputManager.Set.VoiceCommandRecieved(vac));
+            }
+        }
+
         actions.Add("I summon a monster in attack", SummonMonster);
         actions.Add("I summon a monster in defense", SummonMonster);
         actions.Add("I set a monster", FacedownDef);
