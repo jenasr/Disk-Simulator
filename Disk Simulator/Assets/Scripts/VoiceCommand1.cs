@@ -12,7 +12,8 @@ public class VoiceCommandOption {
     
     
     public static VoiceCommandOption[] all = {
-        SummonMonsterAtk
+        SummonMonsterAtk,
+        SummonMonsterDef
     };
 
     public List<string> keywords;
@@ -39,16 +40,16 @@ public class VoiceCommand1 : MonoBehaviour
             }
         }
 
-        actions.Add("I summon a monster in attack", SummonMonster);
-        actions.Add("I summon a monster in defense", SummonMonster);
-        actions.Add("I set a monster", FacedownDef);
+        //actions.Add("I summon a monster in attack", SummonMonster);
+        //actions.Add("I summon a monster in defense", SummonMonster);
+        /*actions.Add("I set a monster", FacedownDef);
         actions.Add("I activate a spell card", ActivateCard);
         actions.Add("I activate a field spell card", ActivateCard);
         //actions.Add("I activate a trap card", ActivateCard);
         actions.Add("I set a card facedown", SetCard);
         actions.Add("I set a field spell card facedown", SetCard);
         actions.Add("I discard a card to the graveyard", DiscardCard);
-        actions.Add("I banish a card from hand", DiscardCard);
+        actions.Add("I banish a card from hand", DiscardCard);*/ 
         keywordRecognizer = new KeywordRecognizer(actions.Keys.ToArray());
         keywordRecognizer.OnPhraseRecognized += RecognizedSpeech;
         //The command below should be executed once a card is being scanned
