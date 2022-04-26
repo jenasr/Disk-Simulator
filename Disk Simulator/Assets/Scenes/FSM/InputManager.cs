@@ -31,7 +31,7 @@ public static class InputManager {
 
     public static class VoiceCommandRecieved {
         public static bool yes;
-        public static VoiceCommandOption command;
+        public static VoiceCommand command;
     }
 
     //*************************************************************************************************
@@ -54,7 +54,7 @@ public static class InputManager {
             InputManager.CardSelected.yes = true;
             InputManager.CardSelected.card = card;
         }
-        public static void VoiceCommandRecieved (VoiceCommandOption command) {
+        public static void VoiceCommandRecieved (VoiceCommand command) {
             InputManager.VoiceCommandRecieved.yes = true;
             InputManager.VoiceCommandRecieved.command = command;
         }

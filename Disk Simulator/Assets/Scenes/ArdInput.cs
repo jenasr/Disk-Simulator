@@ -33,6 +33,7 @@ public class ArdInput : MonoBehaviour
                 int id;
                 if (int.TryParse(filename, out id))
                 {
+                    InputManager.Set.CardScanned(id);
                     card_Id = id;
                     has_Card = true;
                 }
