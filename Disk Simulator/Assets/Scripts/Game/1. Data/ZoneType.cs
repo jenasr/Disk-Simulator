@@ -29,7 +29,7 @@ namespace YuGiOh {
                 result |= CardOrientation.facedown;
             }
             if ((z & validSidewaysZones) != 0) {
-                result |= CardOrientation.faceupideways;
+                result |= CardOrientation.faceupSideways;
             }
             if ((z & validFacedownSidewaysZones) != 0) {
                 result |= CardOrientation.facedownsideways;

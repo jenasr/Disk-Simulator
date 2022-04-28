@@ -35,7 +35,7 @@ public class Game_CardBehaviour : MonoBehaviour, IPointerClickHandler {
                 transform.rotation = Quaternion.identity;
                 sr.color = new Color(.5f, .5f, .5f, 1);
                 break;
-            case CardOrientation.faceupideways:
+            case CardOrientation.faceupSideways:
                 transform.rotation = Quaternion.Euler(0, 0, -90);
                 sr.color = new Color(1, 1, 1, 1);
                 break;

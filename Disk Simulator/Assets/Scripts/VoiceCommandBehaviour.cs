@@ -21,16 +21,21 @@ public class VoiceCommandBehaviour : MonoBehaviour
             }
         }
 
-        //actions.Add("I summon a monster in attack", SummonMonster);
-        //actions.Add("I summon a monster in defense", SummonMonster);
-        /*actions.Add("I set a monster", FacedownDef);
+
+        /*
+        actions.Add("I summon a monster in attack", SummonMonster);
+        actions.Add("I summon a monster in defense", SummonMonster);
+        actions.Add("I set a monster", FacedownDef);
         actions.Add("I activate a spell card", ActivateCard);
         actions.Add("I activate a field spell card", ActivateCard);
-        //actions.Add("I activate a trap card", ActivateCard);
+        actions.Add("I activate a trap card", ActivateCard);
         actions.Add("I set a card facedown", SetCard);
         actions.Add("I set a field spell card facedown", SetCard);
         actions.Add("I discard a card to the graveyard", DiscardCard);
-        actions.Add("I banish a card from hand", DiscardCard);*/ 
+        actions.Add("I banish a card from hand", DiscardCard);
+        */
+
+
         keywordRecognizer = new KeywordRecognizer(actions.Keys.ToArray());
         keywordRecognizer.OnPhraseRecognized += RecognizedSpeech;
         //The command below should be executed once a card is being scanned
@@ -45,58 +50,5 @@ public class VoiceCommandBehaviour : MonoBehaviour
         text = speech.text;
         actions[speech.text].Invoke();
         
-    }
-
-    private void SummonMonster()
-    {
-       if (text.Contains("attack"))
-        {
-            print("Summon in attack position");
-        }
-       else if (text.Contains("defense"))
-        {
-            print("Summon in defense position");
-        }
-    }
-
-    private void ActivateCard()
-    {
-        if (text.Contains("field"))
-        {
-            print("Activate field spell");
-        }
-        else 
-        {
-            print("Activate spell card");
-        }
-    }
-
-    private void SetCard()
-    {
-        if (text.Contains("field"))
-        {
-            print("Set field spell");
-        }
-        else
-        {
-            print("Set spell/trap card");
-        }
-    }
-
-    private void DiscardCard()
-    {
-        if (text.Contains("graveyard"))
-        {
-            print("Send to graveyard");
-        }
-        else if (text.Contains("banish"))
-        {
-            print("Banish card");
-        }
-    }
-
-    private void FacedownDef()
-    {
-        print("Set a monster in facedown defense position");
     }
 }
