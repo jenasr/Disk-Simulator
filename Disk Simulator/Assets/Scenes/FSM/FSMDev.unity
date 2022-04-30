@@ -256,6 +256,7 @@ MonoBehaviour:
     cardActionMenuBehaviour: {fileID: 424752296}
     gameBehaviour: {fileID: 105555826}
     backgroundButton: {fileID: 1623406328}
+    vcb: {fileID: 105555830}
 --- !u!4 &105555828
 Transform:
   m_ObjectHideFlags: 0

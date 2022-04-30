@@ -24,11 +24,13 @@ public class WaitForInputState : GameState {
             references.cardActionMenuBehaviour.ClearOptions();
         }
 
-        if (InputManager.VoiceCommandRecieved.command == VoiceCommand.EndTurn) {
-            var a = SetPlayerTurnAction.Get(g, (g.currentPlayer + 1) % g.players.Length);
-            actionStack.AddExecute(a);
-            references.cardActionMenuBehaviour.ClearOptions();
-        }
+        // Voice Command is dissabled in this state, so this should never be called
+        // will leave incase this changes
+        //if (InputManager.VoiceCommandRecieved.command == VoiceCommand.EndTurn) {
+        //    var a = SetPlayerTurnAction.Get(g, (g.currentPlayer + 1) % g.players.Length);
+        //    actionStack.AddExecute(a);
+        //    references.cardActionMenuBehaviour.ClearOptions();
+        //}
 
         return null;
     }

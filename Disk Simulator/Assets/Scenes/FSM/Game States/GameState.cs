@@ -13,4 +13,6 @@ public abstract class GameState {
     }
 
     public abstract GameState Next();
+
+    public virtual void Exit() { }
 }

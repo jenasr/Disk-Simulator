@@ -10,6 +10,7 @@ public class NewCardActionState : GameState {
         card = c;
         controller.OpenCardActionMenu(card);
         references.cardActionMenuBehaviour.SetPostionCenter();
+        references.vcb.StartListening();
     }
 
 
@@ -77,5 +78,9 @@ public class NewCardActionState : GameState {
         }
 
         return null;
+    }
+
+    public override void Exit() {
+        references.vcb.StopListening();
     }
 }

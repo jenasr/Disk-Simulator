@@ -22,7 +22,12 @@ public class GameStateController {
     }
 
     public void Next() {
-        currentState = currentState.Next() ?? currentState;
+        var newState = currentState.Next() ?? currentState;
+
+        if (newState != currentState) {
+            currentState.Exit();
+            currentState = newState;
+        }
     }
 
 
