@@ -9,6 +9,9 @@ public class VoiceCommand {
     public static VoiceCommand SetSpell = new VoiceCommand("I set a field spell card facedown");
     public static VoiceCommand DiscardToGraveyard = new VoiceCommand("I discard a card to the graveyard");
 
+    // other
+    public static VoiceCommand EndTurn = new VoiceCommand("I end my turn");
+
     public static VoiceCommand[] all = {
         SummonMonsterAtk,
         SummonMonsterDef

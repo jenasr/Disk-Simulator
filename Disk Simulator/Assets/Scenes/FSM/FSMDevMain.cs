@@ -23,7 +23,10 @@ public class FSMDevMain : MonoBehaviour {
 
     void Update() {
         if (Input.GetKeyDown(KeyCode.Q)) {
-            InputManager.Set.CardScanned(3);
+            InputManager.Set.CardScanned(32339440);
+        }
+        if (Input.GetKeyDown(KeyCode.P)) {
+            InputManager.Set.ActionRequested(SetPlayerTurnAction.Get(g, (g.currentPlayer + 1) % g.players.Length));
         }
         gsc.Next();
         InputManager.Clear();

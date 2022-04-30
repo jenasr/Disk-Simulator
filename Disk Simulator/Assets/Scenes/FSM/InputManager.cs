@@ -8,10 +8,9 @@ public static class InputManager {
     //*************************************************************************************************
     // yes => has there been input since last frame
     // {value} => input parameter
-
-
     public static class ActionRequested {
         public static bool yes;
+        public static bool used;
         public static GameAction action;
     }
 
@@ -43,6 +42,9 @@ public static class InputManager {
             InputManager.ActionRequested.yes = true;
             InputManager.ActionRequested.action = action;
         }
+        public static void ActionUsed() {
+            InputManager.ActionRequested.used = true;
+        }
         public static void CancelRequested() {
             InputManager.CancelRequested.yes = true;
         }
@@ -72,5 +74,11 @@ public static class InputManager {
         CardScanned.yes = no;
         CardSelected.yes = no;
         VoiceCommandRecieved.yes = no;
+
+        if (!ActionRequested.used) {
+            ActionRequested.action?.Return();
+            ActionRequested.action = null;
+        }
+        ActionRequested.used = false;
     }
 }

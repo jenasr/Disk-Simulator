@@ -20,7 +20,7 @@ public class NewCardActionState : GameState {
             if (vc == VoiceCommand.SummonMonsterAtk) {
                 var z = ToZoneCardAction.Get(controller.g, card, ZoneType.monster);
                 var a = SetCardOrientationAction.Get(card, CardOrientation.faceup);
-
+                
                 actionStack.AddExecute(z);
                 actionStack.AddExecute(a);
 
@@ -72,6 +72,7 @@ public class NewCardActionState : GameState {
         if (InputManager.ActionRequested.yes) {
             actionStack.AddExecute(InputManager.ActionRequested.action);
             references.cardActionMenuBehaviour.ClearOptions();
+            InputManager.Set.ActionUsed();
             return controller.WaitForInputState();
         }
 

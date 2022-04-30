@@ -9,11 +9,18 @@ public class ArdInput : MonoBehaviour
     
     bool has_Card = false;
     int card_Id;
-    SerialPort sp = new SerialPort("COM3", 9600);
+    SerialPort sp;
     // Start is called before the first frame update
-    void Start()
-    {
-        sp.Open();
+    void Start() {
+        try {
+            sp = new SerialPort("COM3", 9600);
+            sp.Open();
+        }
+        catch (System.IO.IOException e) {
+            enabled = false;
+            print(e.Message);
+            return;
+        }
         sp.ReadTimeout = 20;
     }
 

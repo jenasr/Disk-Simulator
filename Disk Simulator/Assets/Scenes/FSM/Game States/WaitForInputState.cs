@@ -1,10 +1,14 @@
-﻿public class WaitForInputState : GameState {
+﻿using YuGiOh;
+
+
+public class WaitForInputState : GameState {
     public WaitForInputState(GameStateController gsc) : base(gsc) { }
 
     public override GameState Next() {
         if (InputManager.ActionRequested.yes) {
             actionStack.AddExecute(InputManager.ActionRequested.action);
             references.cardActionMenuBehaviour.ClearOptions();
+            InputManager.Set.ActionUsed();
         }
 
         if (InputManager.CardScanned.yes) {
@@ -17,6 +21,12 @@
         }
 
         if (InputManager.CancelRequested.yes) {
+            references.cardActionMenuBehaviour.ClearOptions();
+        }
+
+        if (InputManager.VoiceCommandRecieved.command == VoiceCommand.EndTurn) {
+            var a = SetPlayerTurnAction.Get(g, (g.currentPlayer + 1) % g.players.Length);
+            actionStack.AddExecute(a);
             references.cardActionMenuBehaviour.ClearOptions();
         }
 
