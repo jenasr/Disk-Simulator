@@ -6,12 +6,16 @@ using System.Collections.Generic;
 
 
 public class Game_CardBehaviour : MonoBehaviour, IPointerClickHandler {
+    const string CardBackResourcePath = "Card Back";
+    static Sprite _cardbackSprite;
+    static Sprite cardbackSprite => _cardbackSprite = _cardbackSprite ?? Resources.Load<Sprite>(CardBackResourcePath);
 
     SpriteRenderer sr;
     Game_MainBehaviour m;
     Action<CardEntity> clickCB;
     CardEntity c;
-
+    CardOrientation prevOri;
+    Sprite cardSprite;
 
     private void Awake() {
         sr = GetComponent<SpriteRenderer>();
@@ -25,27 +29,32 @@ public class Game_CardBehaviour : MonoBehaviour, IPointerClickHandler {
 
  
     void SetOrientation() {
-        // TODO - set face down sprite
+        if (prevOri == c.orientation) {
+            // no change
+            return;
+        }
+
         switch (c.orientation) {
             case CardOrientation.faceup:
                 transform.rotation = Quaternion.identity;
-                sr.color = new Color(1, 1, 1, 1);
+                sr.sprite = cardSprite;
                 break;
             case CardOrientation.facedown:
                 transform.rotation = Quaternion.identity;
-                sr.color = new Color(.5f, .5f, .5f, 1);
+                sr.sprite = cardbackSprite;
                 break;
             case CardOrientation.faceupSideways:
                 transform.rotation = Quaternion.Euler(0, 0, -90);
-                sr.color = new Color(1, 1, 1, 1);
+                sr.sprite = cardSprite;
                 break;
             case CardOrientation.facedownsideways:
                 transform.rotation = Quaternion.Euler(0, 0, -90);
-                sr.color = new Color(.5f, .5f, .5f, 1);
+                sr.sprite = cardbackSprite;
                 break;
             default:
                 break;
         }
+        prevOri = c.orientation;
     }
     void SetPosition() {
         var player = c.controller == 0 ? m.player1 : m.player2;
@@ -76,8 +85,15 @@ public class Game_CardBehaviour : MonoBehaviour, IPointerClickHandler {
         }
 
     }
+    
+  
+    public void OnPointerClick(PointerEventData eventData) {
+        clickCB?.Invoke(c);
+    }
+
     public void SetCard(Game_MainBehaviour m, CardEntity c, Action<CardEntity> clickCB) {
-        sr.sprite = c.data.GetSprite();
+        cardSprite = c.data.GetSprite();
+        sr.sprite = cardSprite;
         this.m = m;
         this.c = c;
         this.clickCB = clickCB;
@@ -89,7 +105,4 @@ public class Game_CardBehaviour : MonoBehaviour, IPointerClickHandler {
         GetComponent<PolygonCollider2D>().SetPath(0, shape.ToArray());
     }
 
-    public void OnPointerClick(PointerEventData eventData) {
-        clickCB?.Invoke(c);
-    }
 }

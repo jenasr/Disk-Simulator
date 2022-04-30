@@ -16,6 +16,8 @@ public static class CardOptionUtility {
         // orientations
         AddOrientationOption(CardOrientation.faceup, "To Face Up");
         AddOrientationOption(CardOrientation.facedown, "To Face Down");
+        AddOrientationOption(CardOrientation.faceupSideways, "To Face Up Sideways");
+        AddOrientationOption(CardOrientation.facedownsideways, "To Face Down Sideways");
 
 
         void AddToZoneOption(ZoneType z, string txt) {
