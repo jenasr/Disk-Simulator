@@ -30,7 +30,7 @@ public class CardActionMenuBehaviour : MonoBehaviour {
         var size = GetSizeOnScreen();
 
         float x = Screen.width / 2;
-        float y = (Screen.height - size.y) / 2;
+        float y = (Screen.height - size.y) * 0.4f;
 
         rt.pivot = new Vector2(.5f, .5f);
         transform.position = new Vector3(x, y);

@@ -14,10 +14,10 @@ public static class CardOptionUtility {
         }
 
         // orientations
-        AddOrientationOption(CardOrientation.faceup, "To Face Up");
-        AddOrientationOption(CardOrientation.facedown, "To Face Down");
-        AddOrientationOption(CardOrientation.faceupSideways, "To Face Up Sideways");
-        AddOrientationOption(CardOrientation.facedownsideways, "To Face Down Sideways");
+        AddOrientationOption(CardOrientation.faceup, c.zone == ZoneType.monster ? "To Attack" : "Activate");
+        AddOrientationOption(CardOrientation.facedown, "Set");
+        AddOrientationOption(CardOrientation.faceupSideways, "To Defense");
+        AddOrientationOption(CardOrientation.facedownsideways, "Set");
 
 
         void AddToZoneOption(ZoneType z, string txt) {
