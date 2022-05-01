@@ -1,0 +1,11 @@
+{
+    "id": 88619463,
+    "name": "Sorcerer of Dark Magic",
+    "validZones": 15,
+    "cardType": 1,
+    "monsterType": 262144,
+    "attribute": 1,
+    "level": 9,
+    "atk": 3200,
+    "def": 2800
+}

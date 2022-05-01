@@ -1,0 +1,11 @@
+{
+    "id": 46986414,
+    "name": "Dark Magician",
+    "validZones": 15,
+    "cardType": 1,
+    "monsterType": 262144,
+    "attribute": 1,
+    "level": 8,
+    "atk": 2500,
+    "def": 2100
+}

@@ -1,0 +1,11 @@
+{
+    "id": 35539880,
+    "name": "Birthright",
+    "validZones": 23,
+    "cardType": 4,
+    "monsterType": 2097152,
+    "attribute": 16,
+    "level": 4,
+    "atk": 1600,
+    "def": 300
+}

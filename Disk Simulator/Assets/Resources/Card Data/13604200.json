@@ -1,0 +1,11 @@
+{
+    "id": 13604200,
+    "name": "Sage's Stone",
+    "validZones": 23,
+    "cardType": 2,
+    "monsterType": 2097152,
+    "attribute": 16,
+    "level": 4,
+    "atk": 1600,
+    "def": 300
+}

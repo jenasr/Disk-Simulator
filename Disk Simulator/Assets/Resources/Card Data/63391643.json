@@ -1,0 +1,11 @@
+{
+    "id": 63391643,
+    "name": "Thousand Knives",
+    "validZones": 23,
+    "cardType": 2,
+    "monsterType": 262144,
+    "attribute": 1,
+    "level": 6,
+    "atk": 2000,
+    "def": 1700
+}

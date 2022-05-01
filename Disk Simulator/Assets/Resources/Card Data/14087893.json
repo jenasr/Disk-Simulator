@@ -1,0 +1,11 @@
+{
+    "id": 14087893,
+    "name": "Book of Moon",
+    "validZones": 23,
+    "cardType": 2,
+    "monsterType": 262144,
+    "attribute": 1,
+    "level": 6,
+    "atk": 2000,
+    "def": 1700
+}

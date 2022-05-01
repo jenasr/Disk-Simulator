@@ -1,0 +1,11 @@
+{
+    "id": 89631139,
+    "name": "Blue-Eyes White Dragon",
+    "validZones": 15,
+    "cardType": 1,
+    "monsterType": 64,
+    "attribute": 16,
+    "level": 8,
+    "atk": 3000,
+    "def": 2500
+}

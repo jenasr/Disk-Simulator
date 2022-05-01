@@ -1,0 +1,11 @@
+{
+    "id": 10667321,
+    "name": "Ancient Rules",
+    "validZones": 23,
+    "cardType": 2,
+    "monsterType": 2097152,
+    "attribute": 16,
+    "level": 4,
+    "atk": 1600,
+    "def": 300
+}
