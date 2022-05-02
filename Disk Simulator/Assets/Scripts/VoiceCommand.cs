@@ -15,7 +15,11 @@ public class VoiceCommand {
 
     public static VoiceCommand[] all = {
         SummonMonsterAtk,
-        SummonMonsterDef
+        SummonMonsterDef,
+        SummonMonsterSet,
+        SetSpell,
+        PlaySpell,
+        DiscardToGraveyard
     };
 
     public List<string> keywords;
