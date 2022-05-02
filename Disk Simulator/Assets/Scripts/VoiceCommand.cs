@@ -6,7 +6,8 @@ public class VoiceCommand {
     public static VoiceCommand SummonMonsterAtk = new VoiceCommand("I summon a monster in attack");
     public static VoiceCommand SummonMonsterDef = new VoiceCommand("I summon a monster in defense");
     public static VoiceCommand SummonMonsterSet = new VoiceCommand("I set a monster");
-    public static VoiceCommand SetSpell = new VoiceCommand("I set a field spell card facedown");
+    public static VoiceCommand SetSpell = new VoiceCommand("I set a field spell card facedown", "I set a card");
+    public static VoiceCommand PlaySpell = new VoiceCommand("I activate a spell card");
     public static VoiceCommand DiscardToGraveyard = new VoiceCommand("I discard a card to the graveyard");
 
     // other

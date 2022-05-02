@@ -68,6 +68,16 @@ public class NewCardActionState : GameState {
                 references.cardActionMenuBehaviour.ClearOptions();
                 return controller.WaitForInputState();
             }
+            else if(vc == VoiceCommand.PlaySpell) {
+                var z = ToZoneCardAction.Get(controller.g, card, ZoneType.spell);
+                var a = SetCardOrientationAction.Get(card, CardOrientation.faceup);
+
+                actionStack.AddExecute(z);
+                actionStack.AddExecute(a);
+
+                references.cardActionMenuBehaviour.ClearOptions();
+                return controller.WaitForInputState();
+            }
         }
 
         if (InputManager.ActionRequested.yes) {
