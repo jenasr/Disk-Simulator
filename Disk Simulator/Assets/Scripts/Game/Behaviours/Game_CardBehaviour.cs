@@ -25,6 +25,7 @@ public class Game_CardBehaviour : MonoBehaviour, IPointerClickHandler {
     void Update() {
         SetPosition();
         SetOrientation();
+
     }   
 
  
@@ -55,6 +56,10 @@ public class Game_CardBehaviour : MonoBehaviour, IPointerClickHandler {
                 break;
         }
         prevOri = c.orientation;
+
+        if (c.controller == 1) {
+            transform.eulerAngles += new Vector3(0, 0, 180);
+        }
     }
     void SetPosition() {
         var player = c.controller == 0 ? m.player1 : m.player2;
