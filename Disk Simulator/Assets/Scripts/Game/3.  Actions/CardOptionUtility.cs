@@ -35,8 +35,12 @@ public static class CardOptionUtility {
                 // zone is full
                 return;
             }
+            GameAction a = ToZoneCardAction.Get(g, c, z);
 
-            cardActionMenuBehaviour.AddOption(txt, ToZoneCardAction.Get(g, c, z));
+            if (z == ZoneType.graveyard) {
+                a = a.Then(SetCardOrientationAction.Get(c, CardOrientation.faceup));
+            }
+            cardActionMenuBehaviour.AddOption(txt, a);
         }
         void AddOrientationOption(CardOrientation ori, string txt) {
             if (c.orientation == ori) {

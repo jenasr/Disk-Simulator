@@ -3,7 +3,7 @@ using YuGiOh;
 
 public class MainGP_Main : MonoBehaviour {
     public GameObjectReferences references;
-
+    public PlayerHighlighter ph;
     GameStateController gsc;
     Game g;
     GameActionStack gas;
@@ -12,7 +12,7 @@ public class MainGP_Main : MonoBehaviour {
         g = new Game();
         gas = new GameActionStack();
         gsc = new GameStateController(g, gas, references);
-
+        ph.Init(g);
         references.backgroundButton.onClick.AddListener(() => InputManager.Set.CancelRequested());
         references.cardActionMenuBehaviour.OnActionSelect += (a) => {
             InputManager.Set.ActionRequested(a);
