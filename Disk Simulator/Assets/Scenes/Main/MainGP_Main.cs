@@ -9,9 +9,6 @@ public class MainGP_Main : MonoBehaviour {
     GameActionStack gas;
 
     void Start() {
-        if (Input.GetKey(KeyCode.X) && Input.GetKey(KeyCode.LeftControl)) {
-            Application.Quit();
-        }
         g = new Game();
         gas = new GameActionStack();
         gsc = new GameStateController(g, gas, references);
@@ -34,6 +31,10 @@ public class MainGP_Main : MonoBehaviour {
         }
         if (Input.GetKeyDown(KeyCode.Escape)) {
             InputManager.Set.CancelRequested();
+        }
+        if (Input.GetKey(KeyCode.X) && Input.GetKey(KeyCode.LeftControl))
+        {
+            Application.Quit();
         }
         gsc.Next();
         InputManager.Clear();
