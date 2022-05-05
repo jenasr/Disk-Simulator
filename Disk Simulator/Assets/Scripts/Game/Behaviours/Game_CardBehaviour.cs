@@ -76,6 +76,7 @@ public class Game_CardBehaviour : MonoBehaviour, IPointerClickHandler {
             case ZoneType.graveyard:
                 // TODO - set sprite sorting order
                 transform.position = player.graveyardZone.transform.position;
+                sr.sortingOrder = -c.zonePlacement;
                 break;
             case ZoneType.monster:
                 transform.position = player.monsterZones[c.zonePlacement].transform.position;

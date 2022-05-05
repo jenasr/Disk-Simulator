@@ -23,8 +23,14 @@ public class MainGP_Main : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Q)) {
             InputManager.Set.CardScanned(32339440);
         }
+        if (Input.GetKeyDown(KeyCode.W)) {
+            InputManager.Set.CardScanned(38033121);
+        }
         if (Input.GetKeyDown(KeyCode.P)) {
             InputManager.Set.ActionRequested(SetPlayerTurnAction.Get(g, (g.currentPlayer + 1) % g.players.Length));
+        }
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            InputManager.Set.CancelRequested();
         }
         gsc.Next();
         InputManager.Clear();

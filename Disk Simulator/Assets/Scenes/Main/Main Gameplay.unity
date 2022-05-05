@@ -2217,13 +2217,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterZones:
-  - {fileID: 474695671}
-  - {fileID: 425498022}
   - {fileID: 1557082943}
   - {fileID: 1826325039}
+  - {fileID: 425498022}
   - {fileID: 758722346}
+  - {fileID: 474695671}
   spellZones:
-  - {fileID: 55287609}
+  - {fileID: 42856439}
   - {fileID: 1457670792}
   - {fileID: 42856439}
   - {fileID: 1525377003}
@@ -2562,8 +2562,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.14016987, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -62.849976, y: 0.22506714}
-  m_SizeDelta: {x: -114.30001, y: -1.0499077}
+  m_AnchoredPosition: {x: 26508.266, y: 14667.93}
+  m_SizeDelta: {x: 813.93, y: 511.35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1428789502
 MonoBehaviour:
@@ -3709,11 +3709,11 @@ MonoBehaviour:
   - {fileID: 1841409817}
   - {fileID: 1412584746}
   spellZones:
-  - {fileID: 602670295}
-  - {fileID: 210840558}
   - {fileID: 2076070217}
   - {fileID: 2135864187}
+  - {fileID: 210840558}
   - {fileID: 1540364252}
+  - {fileID: 602670295}
   graveyardZone: {fileID: 1155765256}
 --- !u!4 &2105519150
 Transform:

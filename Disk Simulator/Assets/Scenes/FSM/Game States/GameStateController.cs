@@ -30,7 +30,6 @@ public class GameStateController {
         }
     }
 
-
     public WaitForInputState WaitForInputState() {
         return _waitForInputState;
     }
