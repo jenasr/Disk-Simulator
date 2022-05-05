@@ -82,8 +82,14 @@ public class NewCardActionState : GameState {
 
         if (InputManager.ActionRequested.yes) {
             actionStack.AddExecute(InputManager.ActionRequested.action);
-            references.cardActionMenuBehaviour.ClearOptions();
             InputManager.Set.ActionUsed();
+
+            // Hacky - Definitely needs to be fixed better
+            if (InputManager.ActionRequested.action is SetPlayerTurnAction spt) {
+                return null;
+            }
+
+            references.cardActionMenuBehaviour.ClearOptions();
             return controller.WaitForInputState();
         }
 

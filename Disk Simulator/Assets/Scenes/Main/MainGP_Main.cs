@@ -9,6 +9,9 @@ public class MainGP_Main : MonoBehaviour {
     GameActionStack gas;
 
     void Start() {
+        if (Input.GetKey(KeyCode.X) && Input.GetKey(KeyCode.LeftControl)) {
+            Application.Quit();
+        }
         g = new Game();
         gas = new GameActionStack();
         gsc = new GameStateController(g, gas, references);

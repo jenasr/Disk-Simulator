@@ -12,7 +12,7 @@ namespace YuGiOh {
         }
 
         Game g;
-        int targetPlayer;
+        public int targetPlayer;
 
 
         public override void Execute() {
