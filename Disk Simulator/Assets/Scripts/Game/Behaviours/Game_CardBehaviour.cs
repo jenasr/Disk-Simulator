@@ -63,6 +63,8 @@ public class Game_CardBehaviour : MonoBehaviour, IPointerClickHandler {
     }
     void SetPosition() {
         var player = c.controller == 0 ? m.player1 : m.player2;
+        sr.sortingOrder = 0;
+         
         // set position
         switch (c.zone) {
             case ZoneType.none:
@@ -72,6 +74,7 @@ public class Game_CardBehaviour : MonoBehaviour, IPointerClickHandler {
             case ZoneType.hand:
                 // TODO - set to hand position
                 transform.position = Vector3.zero;
+                sr.sortingOrder = 1;
                 break;
             case ZoneType.graveyard:
                 // TODO - set sprite sorting order
